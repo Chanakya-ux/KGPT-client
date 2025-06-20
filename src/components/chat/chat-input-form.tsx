@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useForm, type SubmitHandler } from 'react-hook-form';
@@ -29,7 +30,7 @@ export function ChatInputForm({ onSubmit, isLoading }: ChatInputFormProps) {
 
   const handleFormSubmit: SubmitHandler<FormValues> = async (data) => {
     await onSubmit(data.question);
-    if (!isLoading) { // Only reset if not still loading (e.g. error occurred before loading state change)
+    if (!isLoading) { 
        form.reset();
     }
   };
@@ -43,36 +44,42 @@ export function ChatInputForm({ onSubmit, isLoading }: ChatInputFormProps) {
     }
   };
 
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="flex items-start gap-2 p-4 border-t border-border bg-background sticky bottom-0">
+      <form onSubmit={form.handleSubmit(handleFormSubmit)} className="p-4 border-t border-border bg-background sticky bottom-0">
         <FormField
           control={form.control}
           name="question"
           render={({ field }) => (
-            <FormItem className="flex-grow">
+            <FormItem className="flex-grow relative">
               <FormControl>
                 <Textarea
                   placeholder="Ask KGPT something..."
-                  className="min-h-[52px] resize-none focus-visible:ring-accent"
+                  className="min-h-[52px] resize-none focus-visible:ring-accent pr-14"
                   {...field}
                   onKeyDown={handleKeyDown}
                   disabled={isLoading}
                   aria-label="Type your question here"
                 />
               </FormControl>
+              <Button 
+                type="submit" 
+                size="icon" 
+                variant="default" 
+                className="bg-accent hover:bg-accent/90 text-accent-foreground rounded-full absolute right-3 top-1/2 transform -translate-y-1/2" 
+                disabled={isLoading} 
+                aria-label={isLoading ? "Sending question" : "Send question"}
+              >
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <SendHorizonal className="h-4 w-4" />
+                )}
+              </Button>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit" size="lg" variant="default" className="bg-accent hover:bg-accent/90 text-accent-foreground h-[52px]" disabled={isLoading} aria-label={isLoading ? "Sending question" : "Send question"}>
-          {isLoading ? (
-            <Loader2 className="h-5 w-5 animate-spin" />
-          ) : (
-            <SendHorizonal className="h-5 w-5" />
-          )}
-        </Button>
       </form>
     </Form>
   );
