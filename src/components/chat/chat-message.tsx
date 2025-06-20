@@ -1,7 +1,8 @@
+
 import type { ChatMessageContent } from '@/lib/types';
 import { cn } from '@/lib/utils';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, Bot, AlertTriangle } from 'lucide-react';
+import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Bot, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
 
 interface ChatMessageProps {
@@ -22,10 +23,10 @@ export function ChatMessage({ message }: ChatMessageProps) {
       )}
       aria-live="polite"
     >
-      {!isUser && !isSystem && (
+      {isLLM && (
         <Avatar className="h-8 w-8 border border-border">
-          <AvatarFallback>
-            <Bot className="h-5 w-5 text-primary" />
+          <AvatarFallback className="bg-transparent">
+            <Bot className="h-5 w-5 text-foreground/80" />
           </AvatarFallback>
         </Avatar>
       )}
@@ -36,7 +37,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
 
       <div
         className={cn(
-          'max-w-[70%] rounded-lg p-3 shadow-md break-words',
+          'max-w-[70%] rounded-xl p-3 shadow-md break-words',
           isUser && 'bg-primary text-primary-foreground rounded-br-none',
           isLLM && 'bg-card text-card-foreground rounded-bl-none',
           isSystem && 'bg-destructive/10 text-destructive text-sm italic'
@@ -45,21 +46,14 @@ export function ChatMessage({ message }: ChatMessageProps) {
         <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
         {!isSystem && (
            <p className={cn(
-             'text-xs mt-1',
+             'text-xs mt-1.5',
              isUser ? 'text-primary-foreground/70 text-right' : 'text-muted-foreground text-left'
            )}>
              {format(message.timestamp, 'HH:mm')}
            </p>
         )}
       </div>
-
-      {isUser && !isSystem && (
-        <Avatar className="h-8 w-8 border border-border">
-          <AvatarFallback>
-            <User className="h-5 w-5 text-accent" />
-          </AvatarFallback>
-        </Avatar>
-      )}
+      {/* User avatar removed as per screenshot */}
     </div>
   );
 }

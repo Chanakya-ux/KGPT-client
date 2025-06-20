@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
-
 @layer base {
   :root {
     --background: 220 13% 96%; /* #F0F2F5 Light Gray */
@@ -16,8 +12,8 @@ body {
     --popover-foreground: 231 48% 20%;
     --primary: 231 48% 48%; /* #3F51B5 Deep Blue */
     --primary-foreground: 0 0% 98%; /* White */
-    --secondary: 231 48% 90%; /* Light muted blue */
-    --secondary-foreground: 231 48% 30%; /* Darker muted blue */
+    --secondary: 231 48% 90%; /* Light muted blue for suggested questions */
+    --secondary-foreground: 231 48% 30%; /* Darker muted blue for suggested questions text */
     --muted: 231 20% 88%; /* Lighter gray for muted elements */
     --muted-foreground: 231 20% 45%; /* Darker gray for muted text */
     --accent: 36 100% 50%; /* #FF9800 Vibrant Orange */
@@ -41,27 +37,32 @@ body {
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --header-background: 231 48% 48%; /* Same as primary for light theme header */
+    --header-foreground: 0 0% 98%;
+    --send-button-background: 36 100% 50%; /* Accent for light theme send button */
+    --send-button-foreground: 0 0% 100%;
   }
   .dark {
-    --background: 231 20% 15%; /* Dark blue-gray */
-    --foreground: 220 13% 90%; /* Light gray for text */
-    --card: 231 20% 10%;
-    --card-foreground: 220 13% 90%;
-    --popover: 231 20% 10%;
-    --popover-foreground: 220 13% 90%;
-    --primary: 231 48% 60%; /* Lighter Deep Blue */
-    --primary-foreground: 231 48% 10%; /* Dark blue text on primary buttons */
-    --secondary: 231 20% 25%; /* Darker muted blue */
-    --secondary-foreground: 220 13% 80%; /* Lighter gray text on secondary */
-    --muted: 231 20% 20%;
-    --muted-foreground: 231 20% 55%;
-    --accent: 36 100% 60%; /* Slightly lighter Vibrant Orange */
-    --accent-foreground: 36 100% 10%; /* Very dark orange/brown for text on accent */
-    --destructive: 0 62.8% 30.6%;
+    --background: 226 22% 12%;
+    --foreground: 220 15% 92%;
+    --card: 225 18% 20%;
+    --card-foreground: 220 15% 90%;
+    --popover: 225 18% 15%;
+    --popover-foreground: 220 15% 90%;
+    --primary: 217 70% 55%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 225 15% 28%; /* Suggested questions bg */
+    --secondary-foreground: 220 15% 80%; /* Suggested questions text */
+    --muted: 225 10% 40%;
+    --muted-foreground: 220 10% 65%;
+    --accent: 145 63% 49%; /* Green for online dot, etc. */
+    --accent-foreground: 255 100% 100%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
-    --border: 231 20% 30%;
-    --input: 231 20% 22%; /* Darker background for inputs */
-    --ring: 36 100% 60%; /* Lighter Vibrant Orange for focus rings */
+    --border: 225 15% 30%;
+    --input: 225 20% 16%; /* Chat input bar background */
+    --ring: 217 70% 65%;
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
     --chart-3: 30 80% 55%;
@@ -75,6 +76,11 @@ body {
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    --header-background: 226 22% 15%;
+    --header-foreground: 220 15% 85%;
+    --send-button-background: 225 20% 25%;
+    --send-button-foreground: 220 15% 75%;
   }
 }
 
