@@ -7,8 +7,9 @@ import { ChatInputForm } from './chat-input-form';
 import { askQuestionAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Bot } from 'lucide-react';
+import { ThemeToggleButton } from '@/components/theme-toggle-button';
 
 export function ChatInterface() {
   const [messages, setMessages] = useState<ChatMessageContent[]>([]);
@@ -24,7 +25,6 @@ export function ChatInterface() {
   useEffect(scrollToBottom, [messages]);
   
   useEffect(() => {
-    // Initial greeting message from the bot
     setMessages([
       {
         id: crypto.randomUUID(),
@@ -53,15 +53,6 @@ export function ChatInterface() {
           description: result.error,
           variant: "destructive",
         });
-        // Optionally add system error message to chat
-        // const systemErrorMessage: ChatMessageContent = {
-        //   id: crypto.randomUUID(),
-        //   text: `Error: ${result.error}`,
-        //   sender: 'system',
-        //   timestamp: new Date(),
-        // };
-        // setMessages((prevMessages) => [...prevMessages, systemErrorMessage]);
-
       } else if (result.answer) {
         const llmMessage: ChatMessageContent = {
           id: crypto.randomUUID(),
@@ -78,14 +69,6 @@ export function ChatInterface() {
         description: "An unexpected error occurred. Please try again.",
         variant: "destructive",
       });
-       // Optionally add system error message to chat
-        // const systemErrorMessage: ChatMessageContent = {
-        //   id: crypto.randomUUID(),
-        //   text: "An unexpected error occurred. Please try again.",
-        //   sender: 'system',
-        //   timestamp: new Date(),
-        // };
-        // setMessages((prevMessages) => [...prevMessages, systemErrorMessage]);
     } finally {
       setIsLoading(false);
     }
@@ -97,6 +80,9 @@ export function ChatInterface() {
         <div className="container mx-auto flex items-center gap-2">
           <Bot className="h-7 w-7" />
           <h1 className="text-xl font-semibold font-headline">KGPT Chat</h1>
+          <div className="ml-auto">
+            <ThemeToggleButton />
+          </div>
         </div>
       </header>
       
