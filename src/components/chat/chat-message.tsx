@@ -58,12 +58,12 @@ export function ChatMessage({ message }: ChatMessageProps) {
         className={cn(
           'relative max-w-[70%] rounded-2xl p-3 shadow-lg break-words backdrop-blur-md border overflow-hidden group',
           isUser && 'bg-primary/40 border-primary/30 text-primary-foreground rounded-br-none',
-          isLLM && 'bg-card/70 border-card-foreground/10 text-card-foreground rounded-bl-none',
+          isLLM && 'bg-secondary/70 dark:bg-card/70 border-border text-card-foreground rounded-bl-none',
           isSystem && 'bg-destructive/10 border-destructive/20 text-destructive text-sm italic'
         )}
       >
         {(isUser || isLLM) && (
-            <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 [background:radial-gradient(150px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(255,255,255,0.15),transparent_80%)]"></div>
+            <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 [background:radial-gradient(150px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(0,0,0,0.05),transparent_80%)] dark:[background:radial-gradient(150px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(255,255,255,0.15),transparent_80%)]"></div>
         )}
 
         <div className="relative z-10">
