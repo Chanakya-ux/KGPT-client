@@ -37,10 +37,10 @@ export function ChatMessage({ message }: ChatMessageProps) {
 
       <div
         className={cn(
-          'max-w-[70%] rounded-2xl p-3 shadow-lg break-words',
-          isUser && 'bg-primary text-primary-foreground rounded-br-none',
-          isLLM && 'bg-card text-card-foreground rounded-bl-none',
-          isSystem && 'bg-destructive/10 text-destructive text-sm italic'
+          'max-w-[70%] rounded-2xl p-3 shadow-lg break-words backdrop-blur-md border',
+          isUser && 'bg-primary/40 border-primary/30 text-primary-foreground rounded-br-none',
+          isLLM && 'bg-card/70 border-card-foreground/10 text-card-foreground rounded-bl-none',
+          isSystem && 'bg-destructive/10 border-destructive/20 text-destructive text-sm italic'
         )}
       >
         <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
