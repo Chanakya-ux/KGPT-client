@@ -4,7 +4,6 @@ import type { ChatMessageContent } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Bot, AlertTriangle } from 'lucide-react';
-import { format } from 'date-fns';
 import { useState } from 'react';
 
 interface ChatMessageProps {
@@ -68,14 +67,6 @@ export function ChatMessage({ message }: ChatMessageProps) {
 
         <div className="relative z-10">
             <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
-            {!isSystem && (
-               <p className={cn(
-                 'text-xs mt-1.5',
-                 isUser ? 'text-primary-foreground/70 text-right' : 'text-muted-foreground text-left'
-               )}>
-                 {format(message.timestamp, 'HH:mm')}
-               </p>
-            )}
         </div>
       </div>
       {/* User avatar removed as per screenshot */}
