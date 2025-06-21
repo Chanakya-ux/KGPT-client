@@ -1,9 +1,11 @@
+"use client"
 
 import type { ChatMessageContent } from '@/lib/types';
 import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Bot, AlertTriangle } from 'lucide-react';
 import { format } from 'date-fns';
+import { useState } from 'react';
 
 interface ChatMessageProps {
   message: ChatMessageContent;
@@ -13,6 +15,21 @@ export function ChatMessage({ message }: ChatMessageProps) {
   const isUser = message.sender === 'user';
   const isLLM = message.sender === 'llm';
   const isSystem = message.sender === 'system';
+
+  const [mousePosition, setMousePosition] = useState({ x: -1, y: -1 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({ 
+      x: e.clientX - rect.left, 
+      y: e.clientY - rect.top 
+    });
+  };
+
+  const bubbleStyle = {
+    '--mouse-x': `${mousePosition.x}px`,
+    '--mouse-y': `${mousePosition.y}px`,
+  } as React.CSSProperties;
 
   return (
     <div
@@ -36,22 +53,30 @@ export function ChatMessage({ message }: ChatMessageProps) {
       )}
 
       <div
+        onMouseMove={isUser || isLLM ? handleMouseMove : undefined}
+        style={isUser || isLLM ? bubbleStyle : undefined}
         className={cn(
-          'max-w-[70%] rounded-2xl p-3 shadow-lg break-words backdrop-blur-md border',
+          'relative max-w-[70%] rounded-2xl p-3 shadow-lg break-words backdrop-blur-md border overflow-hidden group',
           isUser && 'bg-primary/40 border-primary/30 text-primary-foreground rounded-br-none',
           isLLM && 'bg-card/70 border-card-foreground/10 text-card-foreground rounded-bl-none',
           isSystem && 'bg-destructive/10 border-destructive/20 text-destructive text-sm italic'
         )}
       >
-        <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
-        {!isSystem && (
-           <p className={cn(
-             'text-xs mt-1.5',
-             isUser ? 'text-primary-foreground/70 text-right' : 'text-muted-foreground text-left'
-           )}>
-             {format(message.timestamp, 'HH:mm')}
-           </p>
+        {(isUser || isLLM) && (
+            <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 [background:radial-gradient(150px_circle_at_var(--mouse-x)_var(--mouse-y),rgba(255,255,255,0.15),transparent_80%)]"></div>
         )}
+
+        <div className="relative z-10">
+            <p className="text-sm leading-relaxed whitespace-pre-wrap">{message.text}</p>
+            {!isSystem && (
+               <p className={cn(
+                 'text-xs mt-1.5',
+                 isUser ? 'text-primary-foreground/70 text-right' : 'text-muted-foreground text-left'
+               )}>
+                 {format(message.timestamp, 'HH:mm')}
+               </p>
+            )}
+        </div>
       </div>
       {/* User avatar removed as per screenshot */}
     </div>
