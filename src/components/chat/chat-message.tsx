@@ -37,7 +37,7 @@ export function ChatMessage({ message }: ChatMessageProps) {
 
       <div
         className={cn(
-          'max-w-[70%] rounded-xl p-3 shadow-md break-words',
+          'max-w-[70%] rounded-2xl p-3 shadow-lg break-words',
           isUser && 'bg-primary text-primary-foreground rounded-br-none',
           isLLM && 'bg-card text-card-foreground rounded-bl-none',
           isSystem && 'bg-destructive/10 text-destructive text-sm italic'
