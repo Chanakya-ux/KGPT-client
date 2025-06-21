@@ -11,7 +11,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
 import { Bot } from 'lucide-react';
 import { ThemeToggleButton } from '@/components/theme-toggle-button';
-import { format } from 'date-fns';
 import { LoadingBubble } from './loading-bubble';
 
 const suggestedQuestionsList = [
@@ -86,8 +85,6 @@ export function ChatInterface() {
     }
   };
 
-  let lastDisplayedDate: string | null = null;
-
   return (
     <div className="flex flex-col h-screen max-h-screen bg-background text-foreground">
       <header className="p-4 border-b border-border bg-[hsl(var(--header-background))] text-[hsl(var(--header-foreground))] shadow-sm sticky top-0 z-10">
@@ -103,42 +100,28 @@ export function ChatInterface() {
       <main className="flex-grow overflow-hidden w-full flex flex-col">
         <ScrollArea className="flex-grow p-4" ref={scrollAreaRef}>
           <div className="container mx-auto max-w-3xl">
-            {messages.map((msg, index) => {
-              const currentDateString = format(msg.timestamp, 'yyyy-MM-dd');
-              const showDateSeparator = currentDateString !== lastDisplayedDate;
-              if (showDateSeparator) {
-                lastDisplayedDate = currentDateString;
-              }
-              return (
-                <React.Fragment key={msg.id}>
-                  {showDateSeparator && (
-                    <div className="text-center my-6">
-                      <span className="text-xs text-muted-foreground px-3 py-1 bg-muted/20 rounded-full">
-                        {format(msg.timestamp, 'MMMM d, yyyy')}
-                      </span>
-                    </div>
-                  )}
-                  <ChatMessage message={msg} />
-                </React.Fragment>
-              );
-            })}
+            {messages.map((msg, index) => (
+              <React.Fragment key={msg.id}>
+                <ChatMessage message={msg} />
+                {showSuggestedQuestions && msg.sender === 'llm' && index === 0 && (
+                  <div className="mt-4 flex flex-wrap gap-2 justify-start pl-11">
+                    {suggestedQuestionsList.map((q, i) => (
+                      <Button
+                        key={i}
+                        variant="secondary"
+                        size="sm"
+                        className="rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                        onClick={() => handleSendMessage(q)}
+                      >
+                        {q}
+                      </Button>
+                    ))}
+                  </div>
+                )}
+              </React.Fragment>
+            ))}
             {isLoading && <LoadingBubble />}
             <div ref={messagesEndRef} />
-            {showSuggestedQuestions && messages.length === 1 && messages[0].sender === 'llm' && (
-              <div className="mt-4 flex flex-wrap gap-2 justify-start">
-                {suggestedQuestionsList.map((q, i) => (
-                  <Button
-                    key={i}
-                    variant="secondary"
-                    size="sm"
-                    className="rounded-lg bg-secondary text-secondary-foreground hover:bg-secondary/80"
-                    onClick={() => handleSendMessage(q)}
-                  >
-                    {q}
-                  </Button>
-                ))}
-              </div>
-            )}
           </div>
         </ScrollArea>
         <ChatInputForm onSubmit={handleSendMessage} isLoading={isLoading} />
