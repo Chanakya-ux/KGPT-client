@@ -98,11 +98,20 @@ export default {
             transform: 'translateY(0)',
           },
         },
+        'bubble-bounce': {
+          '0%, 100%': {
+            transform: 'translateY(0)',
+          },
+          '50%': {
+            transform: 'translateY(-6px)',
+          },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         fadeIn: 'fadeIn 0.4s ease-out forwards',
+        'bubble-bounce': 'bubble-bounce 1s infinite ease-in-out',
       },
     },
   },

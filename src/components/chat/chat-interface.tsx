@@ -12,6 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Bot } from 'lucide-react';
 import { ThemeToggleButton } from '@/components/theme-toggle-button';
 import { format } from 'date-fns';
+import { LoadingBubble } from './loading-bubble';
 
 const suggestedQuestionsList = [
   "When is Spring Fest?",
@@ -31,7 +32,7 @@ export function ChatInterface() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  useEffect(scrollToBottom, [messages]);
+  useEffect(scrollToBottom, [messages, isLoading]);
   
   useEffect(() => {
     setMessages([
@@ -121,6 +122,7 @@ export function ChatInterface() {
                 </React.Fragment>
               );
             })}
+            {isLoading && <LoadingBubble />}
             <div ref={messagesEndRef} />
             {showSuggestedQuestions && messages.length === 1 && messages[0].sender === 'llm' && (
               <div className="mt-4 flex flex-wrap gap-2 justify-start">
