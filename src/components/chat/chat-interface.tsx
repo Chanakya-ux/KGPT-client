@@ -91,7 +91,13 @@ export function ChatInterface() {
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BlinkingBotIcon className="h-7 w-7" />
-            <h1 className="text-xl font-semibold font-headline">KGPT</h1>
+            <h1 className="kgpt-heading text-xl font-semibold font-headline">
+              {'KGPT'.split('').map((char, index) => (
+                <span key={index} className="kgpt-letter inline-block">
+                  {char}
+                </span>
+              ))}
+            </h1>
           </div>
           <ThemeToggleButton />
         </div>

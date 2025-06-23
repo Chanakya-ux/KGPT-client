@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -91,4 +92,24 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.kgpt-letter {
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.kgpt-heading:hover .kgpt-letter:nth-child(1) {
+  transform: translateY(-8px) rotate(-15deg);
+}
+
+.kgpt-heading:hover .kgpt-letter:nth-child(2) {
+  transform: translateY(5px) rotate(10deg);
+}
+
+.kgpt-heading:hover .kgpt-letter:nth-child(3) {
+  transform: translateY(-10px) rotate(5deg);
+}
+
+.kgpt-heading:hover .kgpt-letter:nth-child(4) {
+  transform: translateY(6px) rotate(-12deg);
 }
