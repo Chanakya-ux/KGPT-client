@@ -9,9 +9,9 @@ import { askQuestionAction } from '@/app/actions';
 import { useToast } from '@/hooks/use-toast';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Button } from '@/components/ui/button';
-import { Bot } from 'lucide-react';
 import { ThemeToggleButton } from '@/components/theme-toggle-button';
 import { LoadingBubble } from './loading-bubble';
+import { BlinkingBotIcon } from '../icons/blinking-bot-icon';
 
 const suggestedQuestionsList = [
   "When is Spring Fest?",
@@ -90,7 +90,7 @@ export function ChatInterface() {
       <header className="p-4 border-b border-border bg-[hsl(var(--header-background))] text-[hsl(var(--header-foreground))] shadow-sm sticky top-0 z-10">
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Bot className="h-7 w-7" />
+            <BlinkingBotIcon className="h-7 w-7" />
             <h1 className="text-xl font-semibold font-headline">KGPT Chat</h1>
           </div>
           <ThemeToggleButton />
