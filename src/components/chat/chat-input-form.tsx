@@ -64,19 +64,24 @@ export function ChatInputForm({ onSubmit, isLoading }: ChatInputFormProps) {
                       aria-label="Type your question here"
                     />
                   </FormControl>
-                  <Button 
-                    type="submit" 
-                    size="icon" 
-                    variant="default" 
-                    className="bg-[hsl(var(--send-button-background))] hover:bg-[hsl(var(--send-button-background))]/90 text-[hsl(var(--send-button-foreground))] rounded-full absolute right-3 top-1/2 transform -translate-y-1/2" 
-                    disabled={isLoading} 
+                  <Button
+                    type="submit"
+                    size="icon"
+                    variant="default"
+                    className="god-tier-send-button bg-[hsl(var(--send-button-background))] hover:bg-[hsl(var(--send-button-background))]/90 text-[hsl(var(--send-button-foreground))] rounded-full absolute right-3 top-1/2"
+                    disabled={isLoading}
                     aria-label={isLoading ? "Sending question" : "Send question"}
                   >
-                    {isLoading ? (
-                      <Loader2 className="h-4 w-4 animate-spin" />
-                    ) : (
-                      <SendHorizonal className="h-4 w-4" />
-                    )}
+                    <span className="god-tier-aura-swirl"></span>
+                    <span className="god-tier-aura-pulse"></span>
+                    <span className="god-tier-icon-container">
+                      {isLoading ? (
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                      ) : (
+                        <SendHorizonal className="h-4 w-4" />
+                      )}
+                    </span>
+                    <span className="god-tier-burst"></span>
                   </Button>
                 </div>
                 <FormMessage />

@@ -113,3 +113,88 @@
 .kgpt-heading:hover .kgpt-letter:nth-child(4) {
   transform: translateY(6px) rotate(-12deg);
 }
+
+@keyframes god-tier-aura-swirl {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes god-tier-aura-pulse {
+  0%, 100% { transform: scale(0.8); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+@keyframes god-tier-click-burst {
+  from { transform: scale(0.5); opacity: 0.8; }
+  to { transform: scale(4); opacity: 0; }
+}
+
+@layer components {
+  .god-tier-send-button {
+    position: relative;
+    overflow: hidden;
+    transform: translateY(-50%) translateZ(0); /* Apply vertical centering and promote layer */
+    transition: transform 0.2s ease-out;
+  }
+
+  .god-tier-send-button:hover:not(:disabled) {
+    transform: translateY(-50%) scale(1.1);
+  }
+  
+  .god-tier-send-button:active:not(:disabled) {
+    transform: translateY(-50%) scale(1.05);
+  }
+
+  .god-tier-send-button > span {
+    pointer-events: none;
+    position: absolute;
+    z-index: 1;
+  }
+
+  .god-tier-icon-container {
+    position: relative;
+    z-index: 10; /* Keep icon on top */
+  }
+
+  /* Swirling Halo */
+  .god-tier-aura-swirl {
+    inset: -10px;
+    background: conic-gradient(from 180deg at 50% 50%, hsl(var(--primary)), hsl(var(--accent)), hsl(var(--primary)/0.5), hsl(var(--accent)), hsl(var(--primary)));
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    animation: god-tier-aura-swirl 4s linear infinite paused;
+    filter: blur(15px);
+  }
+
+  .god-tier-send-button:hover:not(:disabled) .god-tier-aura-swirl {
+    opacity: 0.5;
+    animation-play-state: running;
+  }
+
+  /* Pulsating Glow */
+  .god-tier-aura-pulse {
+    inset: 0;
+    border-radius: 9999px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    background: hsl(var(--accent) / 0.8);
+    filter: blur(20px);
+    animation: god-tier-aura-pulse 2s ease-in-out infinite paused;
+  }
+
+  .god-tier-send-button:hover:not(:disabled) .god-tier-aura-pulse {
+    opacity: 1;
+    animation-play-state: running;
+  }
+  
+  /* Click Burst Effect */
+  .god-tier-burst {
+    inset: 0;
+    border-radius: 9999px;
+    background: hsl(var(--accent-foreground));
+    transform: scale(0);
+    opacity: 0;
+  }
+  
+  .god-tier-send-button:active:not(:disabled) .god-tier-burst {
+    animation: god-tier-click-burst 0.4s ease-out forwards;
+  }
+}
