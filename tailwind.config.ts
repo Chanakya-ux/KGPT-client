@@ -112,6 +112,13 @@ export default {
           '5%': { transform: 'scaleY(0.1)' },
           '10%': { transform: 'scaleY(1)' },
         },
+        sway: {
+          '0%, 100%': { transform: 'rotate(0)' },
+          '20%': { transform: 'rotate(-8deg)' },
+          '40%': { transform: 'rotate(8deg)' },
+          '60%': { transform: 'rotate(-4deg)' },
+          '80%': { transform: 'rotate(4deg)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
@@ -119,6 +126,7 @@ export default {
         fadeIn: 'fadeIn 0.4s ease-out forwards',
         'bubble-bounce': 'bubble-bounce 1s infinite ease-in-out',
         blink: 'blink 4s ease-in-out infinite',
+        sway: 'sway 2.5s ease-in-out infinite',
       },
     },
   },
