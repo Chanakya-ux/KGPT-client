@@ -91,7 +91,7 @@ export function ChatInterface() {
         <div className="container mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <BlinkingBotIcon className="h-7 w-7" />
-            <h1 className="text-xl font-semibold font-headline">KGPT Chat</h1>
+            <h1 className="text-xl font-semibold font-headline">KGPT</h1>
           </div>
           <ThemeToggleButton />
         </div>

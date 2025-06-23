@@ -52,31 +52,33 @@ export function ChatInputForm({ onSubmit, isLoading }: ChatInputFormProps) {
             control={form.control}
             name="question"
             render={({ field }) => (
-              <FormItem className="flex-grow relative">
-                <FormControl>
-                  <Textarea
-                    placeholder="Ask KGPT anything..."
-                    className="min-h-[52px] resize-none focus-visible:ring-ring pr-14 bg-background rounded-lg border-border focus-visible:border-primary"
-                    {...field}
-                    onKeyDown={handleKeyDown}
-                    disabled={isLoading}
-                    aria-label="Type your question here"
-                  />
-                </FormControl>
-                <Button 
-                  type="submit" 
-                  size="icon" 
-                  variant="default" 
-                  className="bg-[hsl(var(--send-button-background))] hover:bg-[hsl(var(--send-button-background))]/90 text-[hsl(var(--send-button-foreground))] rounded-full absolute right-3 top-1/2 transform -translate-y-1/2" 
-                  disabled={isLoading} 
-                  aria-label={isLoading ? "Sending question" : "Send question"}
-                >
-                  {isLoading ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  ) : (
-                    <SendHorizonal className="h-4 w-4" />
-                  )}
-                </Button>
+              <FormItem>
+                <div className="relative">
+                  <FormControl>
+                    <Textarea
+                      placeholder="Ask KGPT anything..."
+                      className="min-h-[52px] resize-none focus-visible:ring-ring pr-14 bg-background rounded-lg border-border focus-visible:border-primary"
+                      {...field}
+                      onKeyDown={handleKeyDown}
+                      disabled={isLoading}
+                      aria-label="Type your question here"
+                    />
+                  </FormControl>
+                  <Button 
+                    type="submit" 
+                    size="icon" 
+                    variant="default" 
+                    className="bg-[hsl(var(--send-button-background))] hover:bg-[hsl(var(--send-button-background))]/90 text-[hsl(var(--send-button-foreground))] rounded-full absolute right-3 top-1/2 transform -translate-y-1/2" 
+                    disabled={isLoading} 
+                    aria-label={isLoading ? "Sending question" : "Send question"}
+                  >
+                    {isLoading ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <SendHorizonal className="h-4 w-4" />
+                    )}
+                  </Button>
+                </div>
                 <FormMessage />
               </FormItem>
             )}
